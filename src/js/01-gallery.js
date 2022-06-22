@@ -28,9 +28,8 @@ function createGallery(galleryItems) {
     .join('');
 }
 
-// new SimpleLightbox('.gallery a', {
-//   captionDelay: 250,
-//   captionsData: 'alt',
-//   scrollZoom: false,
-//   disableRightClick: true,
-// });
+
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
