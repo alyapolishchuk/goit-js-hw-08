@@ -1,29 +1,17 @@
 import throttle from "lodash.throttle";
-
-const form = document.querySelector('.feedback-form');
 const LOCALSTORAGE_KEY = 'feedback-form-state';
 
-const formBtn = document.querySelector('button[type = "submit"]');
-const formData = {};
-
-form.addEventListener('input', onFormInput);
-form.addEventListener('submit', onFormSubmit);
-
-function onFormInput(event) {
-  formData[event.target.name] = event.target.value;
-  localStorage.setItem('feedback-form-state', JSON.stringify(formData));
-  if (event.target.value === '') {
-    formBtn.disabled = 'false';
-  }
+const form = document.querySelector('.feedback-form');
+form.addEventListener('submit', formSubmit)
+function formSubmit(event) {
+    event.preventDefault()
+    console.log(event.currentTarget.elements.message);
 }
 
-function onFormSubmit(event) {
-  event.preventDefault();
-  form.reset();
-  localStorage.removeItem('feedback-form-state');
-}
 
-function onPageLoading() {}
+
+
+
 
 
 
