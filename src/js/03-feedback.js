@@ -1,79 +1,26 @@
+import throttle from "lodash.throttle";
 
+const LOCALSTORAGE_KEY = 'feedback-form-state';
+const form = document.querySelector('.feedback-form');
+const obj = {};
 
+form.addEventListener('submit', formSubmit);
+form.addEventListener('input', formInput);
 
-// import throttle from "lodash.throttle";
-// const LOCALSTORAGE_KEY = 'feedback-form-state';
+function formInput(event) {
+  obj[event.target.name] = event.target.value; // присвоєння ключа об'єкту через квадратні дужки
+  localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(obj));
+  // console.log(obj);
+  // console.log(event.target.message);
+  // console.dir(event.target.input);
+}
+function formSubmit(event) {
+    event.preventDefault()
+    // console.dir(event.currentTarget.elements.message.value);
+    const { email, message } = event.target.elements;
+    // console.log(email.value, message.value);
+    if (!email.value || !message.value) {
+        alert(`Заповніть форму`);
+    } 
+}
 
-// const form = document.querySelector('.feedback-form');
-// form.addEventListener('submit', formSubmit)
-// function formSubmit(event) {
-//     event.preventDefault()
-//     console.log(event.currentTarget.elements.message);
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import throttle from 'lodash.throttle';
-
-// //======================================\\
-// //const
-// const STORAGE_KEY = 'feedback-form-state';
-
-// //refs
-// const form = document.querySelector('.feedback-form');
-// const input = document.querySelector('[name="email"]');
-// const textArea = document.querySelector('[name="message"]');
-// const btn = document.querySelector('[type="submit"]');
-
-// //liseners
-// form.addEventListener('submit', onSubmit);
-// form.addEventListener('input', throttle(onInputForm, 500));
-
-// pushToinputs();
-
-// const dataUser = { [input.name]: input.value, [textArea.name]: textArea.value };
-// localStorage.setItem(STORAGE_KEY, JSON.stringify(dataUser));
-
-// function onSubmit(event) {
-//   event.preventDefault();
-//   if (input.value === '' || textArea.value === '') {
-//     return alert('Будь ласка, заповніть всі поля!');
-//   }
-//   console.log(dataUser);
-//   event.target.reset();
-//   localStorage.removeItem(STORAGE_KEY);
-// }
-
-// function onInputForm(evt) {
-//   dataUser[input.name] = input.value;
-//   dataUser[textArea.name] = textArea.value;
-//   localStorage.setItem(STORAGE_KEY, JSON.stringify(dataUser));
-// }
-
-// function pushToinputs() {
-//   const savedMsg = localStorage.getItem(STORAGE_KEY);
-//   const currentDatsUser = JSON.parse(savedMsg);
-//   if (!currentDatsUser) {
-//     return;
-//   }
-//   input.value = currentDatsUser.email;
-//   textArea.value = currentDatsUser.message;
-// }
